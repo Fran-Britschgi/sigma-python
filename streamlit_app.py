@@ -30,7 +30,7 @@ editor_btns = [{
     "commands": ["submit"],
     "style": {"bottom": "0.44rem", "right": "0.4rem"}
   }]
-response_dict = code_editor.code_editor(code = "print('hi')", buttons=editor_btns)
+response_dict = code_editor.code_editor(code = "my_df = session.table('DATABASE.SCHEMA.TABLE').to_pandas' \nnew_df = my_df *2 \nsession.create_dataframe(new_df).write.mode('overwrite').save_as_table('DATABASE.SCHEMA.NEW_TABLE')", buttons=editor_btns)
 code_input = response_dict['text']
 
 # Display Results
