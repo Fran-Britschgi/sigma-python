@@ -21,8 +21,16 @@ session = Session.builder.configs(connection_parameters).create()
 st.title("Python Code Executor")
 
 st.write("Enter your Python code below:")
-
-response_dict = code_editor.code_editor(code = "print('hi')")
+editor_btns = [{
+    "name": "Run",
+    "feather": "Play",
+    "primary": True,
+    "hasText": True,
+    "showWithIcon": True,
+    "commands": ["submit"],
+    "style": {"bottom": "0.44rem", "right": "0.4rem"}
+  }]
+response_dict = code_editor.code_editor(code = "print('hi')", buttons=editor_btns)
 
 #code_input = st.text_area("Python Code", height=200, value="print('hello')")
 if st.button("Execute"):
