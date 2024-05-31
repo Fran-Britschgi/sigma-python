@@ -22,7 +22,7 @@ st.title("Python Code Executor")
 
 st.write("Enter your Python code below:")
 
-response_dict = code_editor.code_editor(value = "print('hi')")
+response_dict = code_editor.code_editor(code = "print('hi')")
 
 #code_input = st.text_area("Python Code", height=200, value="print('hello')")
 if st.button("Execute"):
