@@ -2,13 +2,13 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import traceback
 from snowflake.snowpark import Session
-
 
 connection_parameters = {
     "account": "cxa94702",
     "user": "francis",
-    "password": "########",
+    "password": st.secrets["password"],
     "role": "sigma_se",
     "warehouse": "PAPERCRANE",
     "database": "SE_DEMO_DB",
