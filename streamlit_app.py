@@ -26,9 +26,8 @@ code_input = st.text_area("Python Code", height=200)
 if st.button("Execute"):
     try:
         # Redirect output to the Streamlit interface
-        exec_globals = {}
+        exec_globals = {'session': session}
         exec(code_input, exec_globals)
         st.success("Code executed successfully!")
-        st.success(f"{traceback.print_last()}")
     except Exception as e:
         st.error(f"An error occurred:\n{traceback.format_exc()}")
