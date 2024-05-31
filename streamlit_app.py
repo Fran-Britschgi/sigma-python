@@ -30,8 +30,8 @@ if st.button("Execute"):
         # Redirect output to the Streamlit interface
         exec_globals = {'session': session}
         exec(response_dict['text'], exec_globals)
-        st.code(response_dict['text'], language=response_dict['lang'])
-        #st.success("Code executed successfully!")
+        #st.code(response_dict['text'], language=response_dict['lang'])
+        st.success("Code executed successfully!")
     except Exception as e:
         st.code(response_dict['text'],language='python')
         st.error(f"An error occurred:\n{traceback.format_exc()}")
