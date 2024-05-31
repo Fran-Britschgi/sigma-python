@@ -2,3 +2,4 @@ altair
 pandas
 streamlit
 snowflake
+streamlit_code_editor

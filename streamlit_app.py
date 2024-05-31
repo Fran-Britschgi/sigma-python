@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import traceback
+import streamlit_code_editor
 from snowflake.snowpark import Session
 
 connection_parameters = {
@@ -20,6 +21,8 @@ session = Session.builder.configs(connection_parameters).create()
 st.title("Python Code Executor")
 
 st.write("Enter your Python code below:")
+
+response_dict = streamlit_code_editor.code_editor("print('hi')")
 
 code_input = st.text_area("Python Code", height=200, value="my_df = session.table('DATABSE.SCHEMA.TABLE').to_pandas' \nnew_df = my_df *2 \nsession.create_dataframe(new_df).write.mode('overwrite').save_as_table('DATABASE.SCHEMA.NEW_TABLE')")
 
