@@ -31,9 +31,15 @@ editor_btns = [{
     "style": {"bottom": "0.44rem", "right": "0.4rem"}
   }]
 response_dict = code_editor.code_editor(code = "print('hi')", buttons=editor_btns)
+code_input = response_dict['text']
 
-# show response dict
+# Display Results
 if len(response_dict['id']) != 0 and ( response_dict['type'] == "selection" or response_dict['type'] == "submit" ):
-    # Capture the text part
-    code_text = response_dict['text']
-    st.code(code_text, language='python') #Captured the code parameter.
+    try:
+        # Redirect output to the Streamlit interface
+        exec_globals = {'session': session}
+        exec(code_input, exec_globals)
+        st.success("Code executed successfully!")
+    except Exception as e:
+        st.code(code_input,language='python')
+        st.error(f"An error occurred:\n{traceback.format_exc()}")
