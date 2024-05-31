@@ -6,6 +6,7 @@ import traceback
 import code_editor
 from snowflake.snowpark import Session
 
+st.set_page_config(layout="wide")
 
 st.title("Python Code Executor")
 account = st.text_input("Snowflake Account")
