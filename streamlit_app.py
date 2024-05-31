@@ -24,14 +24,13 @@ st.write("Enter your Python code below:")
 
 response_dict = code_editor.code_editor("print('hi')")
 
-code_input = st.text_area("Python Code", height=200, value="my_df = session.table('DATABSE.SCHEMA.TABLE').to_pandas' \nnew_df = my_df *2 \nsession.create_dataframe(new_df).write.mode('overwrite').save_as_table('DATABASE.SCHEMA.NEW_TABLE')")
-
+code_input = st.text_area("Python Code", height=200, value="print('hello')")
 if st.button("Execute"):
     try:
         # Redirect output to the Streamlit interface
         exec_globals = {'session': session}
         exec(code_input, exec_globals)
-        st.code(response_dict,language='python')
+        st.code(response_dict['text'],language='python')
         st.success("Code executed successfully!")
     except Exception as e:
         st.code(code_input,language='python')
