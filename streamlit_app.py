@@ -31,7 +31,7 @@ if st.button("Execute"):
         # Redirect output to the Streamlit interface
         exec_globals = {'session': session}
         exec(code_input, exec_globals)
-        st.code(code_input,language='python')
+        st.code(response_dict,language='python')
         st.success("Code executed successfully!")
     except Exception as e:
         st.code(code_input,language='python')
