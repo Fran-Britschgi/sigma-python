@@ -2,39 +2,33 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+from snowflake.snowpark import Session
 
-"""
-# Welcome to Streamlit!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+connection_parameters = {
+    "account": "cxa94702",
+    "user": "francis",
+    "password": "########",
+    "role": "sigma_se",
+    "warehouse": "PAPERCRANE",
+    "database": "SE_DEMO_DB",
+    "schema": "SNOWPARK_UDF",
+}
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+session = Session.builder.configs(connection_parameters).create()
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
+st.title("Python Code Executor")
 
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
+st.write("Enter your Python code below:")
 
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
+code_input = st.text_area("Python Code", height=200)
 
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
-
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+if st.button("Execute"):
+    try:
+        # Redirect output to the Streamlit interface
+        exec_globals = {}
+        exec(code_input, exec_globals)
+        st.success("Code executed successfully!")
+        st.success(f"{traceback.print_last()}")
+    except Exception as e:
+        st.error(f"An error occurred:\n{traceback.format_exc()}")
